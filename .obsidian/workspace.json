@@ -37,22 +37,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "4a437ba11148ac72",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "a4016e1ee069fb11",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -202,9 +186,11 @@
   },
   "active": "c3f302279b51224e",
   "lastOpenFiles": [
-    "ai-agent-research",
     "SSE.md",
     "WebSocket.md",
+    "Pasted image 20250921203146.png",
+    "Pasted image 20250921203054.png",
+    "ai-agent-research",
     "Welcome.md"
   ]
 }
