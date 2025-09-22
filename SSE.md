@@ -1,0 +1,20 @@
+- unidirectional (from server)
+- MIME type: text/event-stream
+- message format
+	- UTF-8
+	- separator: messages separated by 2 newline chars
+	- fields: one field per line. If a line doesn't contain a colon, the entire line is treated as the field name with an empty value string.
+		- event
+		- data
+		- id
+		- retry
+	- comment: colon as first char in line
+		- comment message could be used as a keep-alive
+- JS: EventSource API
+- HTTP version
+	- (Wikipedia) As SSE relies on persistent connections and [chunked transfer encoding](https://en.wikipedia.org/wiki/Chunked_transfer_encoding "Chunked transfer encoding"), it needs at least HTTP/1.1. In HTTP/2 the multiplexing on a shared TCP connection can lead to [head-of-line blocking](https://en.wikipedia.org/wiki/Head-of-line_blocking "Head-of-line blocking").
+	- (MDN) **Warning:** When **not used over HTTP/2**, SSE suffers from a limitation to the maximum number of open connections, which can be especially painful when opening multiple tabs, as the limit is _per browser_ and is set to a very low number (6). The issue has been marked as "Won't fix" in [Chrome](https://crbug.com/275955) and [Firefox](https://bugzil.la/906896). This limit is per browser + domain, which means that you can open 6 SSE connections across all of the tabs to `www.example1.com` and another 6 SSE connections to `www.example2.com` (per [Stack Overflow](https://stackoverflow.com/questions/5195452/websockets-vs-server-sent-events-eventsource/5326159)). When using HTTP/2, the maximum number of simultaneous _HTTP streams_ is negotiated between the server and the client (defaults to 100).
+# Sources
+- https://en.wikipedia.org/wiki/Server-sent_events
+- https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+- https://developer.mozilla.org/en-US/docs/Web/API/EventSource
