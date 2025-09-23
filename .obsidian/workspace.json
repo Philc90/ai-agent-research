@@ -27,20 +27,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "WebSocket.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "WebSocket"
-            }
-          },
-          {
-            "id": "2d6946361bc2d4a2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "Security.md",
                 "mode": "source",
                 "source": false
@@ -50,7 +36,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -198,11 +184,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "2d6946361bc2d4a2",
+  "active": "c3f302279b51224e",
   "lastOpenFiles": [
+    "SSE.md",
     "WebSocket.md",
     "Security.md",
-    "SSE.md",
     "Pasted image 20250921203146.png",
     "Pasted image 20250921203054.png",
     "ai-agent-research",

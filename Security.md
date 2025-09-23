@@ -1,14 +1,5 @@
 
-Methods
-- Use Secure WebSocket (wss://)
-- authn & authz with JWT
-- user input validation (injection attacks)
-	- origin checking (XSS, CSRF)
-- rate limiting
-- CORS
-- https://brightsec.com/blog/websocket-security-top-vulnerabilities/
-	- Data masking can stop security tools from analyzing traffic
-	- Ticket-based authn
+Overview
 - https://websocket.org/guides/security/
 	- **TLS/SSL encryption** (wss:// protocol only)
 	- **Origin validation** to prevent CSWSH (Cross-site WebSocket Hijacking) attacks
@@ -20,8 +11,10 @@ Methods
 	- **Security headers** configured properly
 	- **Logging and monitoring** for suspicious activity
 	- **Regular security updates** for WebSocket libraries
+
+# Types of Attacks
 ## TLS/SSL encryption
-wss:// only
+Use wss:// in production (secure WebSockets)
 
 ### Manage Certificates Effectively:
 
@@ -34,13 +27,17 @@ Proper certificate management is crucial for ensuring the security of your WebSo
 - ****Trust:**** Certificates issued by trusted CAs are recognized by clients as legitimate, fostering trust between the client and the server.
 
 ## Origin Checking
-prevent CSWSH, CSRF attack
-validate origin headers on server side
-utilize CSRF Tokens
-Implement CORS
+Attacks: CSWSH, CSRF
+- validate origin headers on server side
+- utilize CSRF Tokens
+- Implement CORS
 
-## Compression vulnerabilities: CRIME/BREACH
+## Compression vulnerabilities
+
+Attacks: [CRIME](https://en.wikipedia.org/wiki/CRIME)/[BREACH](https://en.wikipedia.org/wiki/BREACH)
+
 - https://websocket.org/guides/websocket-protocol/#compression-extension-rfc-7692---security-considerations
+
 Safe Compression Patterns
 
 **DO:**
@@ -59,24 +56,31 @@ Safe Compression Patterns
 
 Disable `permessage-deflate` compression unless specifically needed. Compression can introduce security vulnerabilities similar to CRIME/BREACH attacks where compression combined with secret data can leak information.
 
-`// Node.js - disable compression for security const wss = new WebSocket.Server({   perMessageDeflate: false });`
-
+```
+// Node.js - disable compression for security const
+wss = new WebSocket.Server({   
+	perMessageDeflate: false
+});
+```
 ## Authentication
+Attacks: CSWSH
 **Authentication** during handshake or immediately after
 **Security headers** configured properly
-prevent CSWSH attacks
 
 Don't assume WebSocket connection equals unlimited access. Check authorization for each action: https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_Sheet.html#message-level-authorization
+
 ## Rate Limiting
-prevent DoS attacks
+Attacks: DoS
+
 **Rate limiting** per connection and globally
 
 ## Message Size Limit
-prevent DoS attacks
+Attacks: DoS
+
 set limit to avoid memory exhaustion
 
 ## Input Validation
-injection attacks: XSS, SQL injection, command injection
+Attacks: injection attacks - XSS, SQL injection, command injection
 - **Use parameterized queries** to prevent injection
 
 **Validate message structure and content** using JSON schemas and allow-lists. Set reasonable size limits (typically 64KB or less) and implement rate limiting to prevent message flooding.
@@ -87,10 +91,15 @@ injection attacks: XSS, SQL injection, command injection
 **Always use `JSON.parse()` instead of `eval()`** for JSON processing - `eval()` enables code execution from untrusted input.
 
 see https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+
+
 ## Heartbeat
+
+Attacks: connection exhaustion attack
+
 detect stale connections
 - **Implement connection timeouts** for idle connections
-connection exhaustion attack
+
 
 
 Persistent WebSocket connections increase DoS risk.
@@ -100,6 +109,7 @@ Persistent WebSocket connections increase DoS risk.
 **Handle idle and dead connections** by implementing idle timeouts to close inactive connections. Use **heartbeat monitoring** with ping/pong frames to detect and clean up dead connections.
 
 **Implement backpressure controls** to prevent memory exhaustion from fast message producers. Many WebSocket implementations lack proper flow control, allowing attackers to overwhelm server memory by sending messages faster than they can be processed.
+
 
 ### Session Management
 
@@ -115,6 +125,8 @@ WebSocket connections often outlive normal sessions, requiring special handling.
 **Token-based authentication:** -- use JWT
 
 For enhanced security, use token-based authentication instead of relying solely on cookies. Tokens can be passed in query strings (note: tokens will appear in access logs and should be redacted) or as part of WebSocket messages after connection establishment. Message-based token passing avoids log exposure but requires protocol design considerations.
+
+
 ## Security Monitoring
 Log Security Events
 - **Monitor for attack patterns** in real-time
@@ -129,13 +141,17 @@ See the [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Log
 
 Detect anomalies
 
-## Update Libraries
+NOTE: Data masking can stop security tools from analyzing traffic
+https://brightsec.com/blog/websocket-security-top-vulnerabilities/
+
+
+## Keep Libraries Updated
 Keep libraries updated to get latest security patches
 
 - **Use Content Security Policy** headers
 
 ## Security Audit
-
+Regular security audits
 - **Have an incident response plan** for security breaches
 - **Regular security audits** and penetration testing
 - **Monitoring gaps**: Traditional HTTP logs only capture the initial upgrade request, missing all message traffic
