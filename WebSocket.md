@@ -35,30 +35,11 @@ WebSocket: Full Duplex
 	- HTTP 3
 	- "If standard WebSocket connections are a good fit for your use case and you need wide browser compatibility, you should employ the WebSockets API to get up and running quickly. However, if your application requires a non-standard custom solution, then you should use the WebTransport API."
 
-# Security
-Methods
-- Use Secure WebSocket (wss://)
-- authn & authz with JWT
-- user input validation (injection attacks)
-	- origin checking (XSS, CSRF)
-- rate limiting
-- CORS
-- https://brightsec.com/blog/websocket-security-top-vulnerabilities/
-	- Data masking can stop security tools from analyzing traffic
-	- Ticket-based authn
-- https://websocket.org/guides/security/
-	- ✅ **TLS/SSL encryption** (wss:// protocol only)
-	- ✅ **Origin validation** to prevent CSWSH (Cross-site WebSocket Hijacking) attacks
-	- ✅ **Authentication** during handshake or immediately after
-	- ✅ **Input validation** for all messages
-	- ✅ **Rate limiting** per connection and globally
-	- ✅ **Message size limits** to prevent DoS
-	- ✅ **Timeout mechanisms** for idle connections
-	- ✅ **Security headers** configured properly
-	- ✅ **Logging and monitoring** for suspicious activity
-	- ✅ **Regular security updates** for WebSocket libraries
+# [[Security]]
 
+# Scaling
+https://websocket.org/guides/building-a-websocket-app/#what-makes-websockets-hard-to-scale
+https://websocket.org/guides/websockets-at-scale/
 # Sources
 https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
-https://www.geeksforgeeks.org/blogs/how-to-secure-your-websocket-connections/
 https://www.youtube.com/watch?v=fG4dkrlaZAA
