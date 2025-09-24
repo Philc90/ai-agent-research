@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Security.md",
+                "file": "WebSocket.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Security"
+              "title": "WebSocket"
             }
           }
         ],
@@ -186,9 +186,19 @@
   },
   "active": "c3f302279b51224e",
   "lastOpenFiles": [
-    "SSE.md",
-    "WebSocket.md",
+    "websocket-poc/README.md",
     "Security.md",
+    "websocket-poc/server/package.json",
+    "websocket-poc/server/package-lock.json",
+    "websocket-poc/server/index.js",
+    "websocket-poc/server",
+    "websocket-poc/app/index.html",
+    "websocket-poc/app/app.js",
+    "websocket-poc/app",
+    "websocket-poc",
+    "New folder",
+    "WebSocket.md",
+    "SSE.md",
     "Pasted image 20250921203146.png",
     "Pasted image 20250921203054.png",
     "ai-agent-research",
